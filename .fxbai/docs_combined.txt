@@ -1,0 +1,77 @@
+Overview / Purpose
+This document defines mandatory technical, security, and architectural rules to ensure consistent API behavior, strong security practices, scalable and maintainable architecture, and clear backend–frontend contracts across all projects utilizing the specified technology stack.
+
+Scope
+Applies to all backend and frontend technologies, frameworks, databases (PostgreSQL, TypeORM), and AI-generated code.
+
+Governance & Priority
+1. Common Policy
+2. Client Policy
+3. Company Policy
+4. Stack Policy Guideline
+
+Security
+- Apply least privilege everywhere.
+- Validate, sanitize, and encode all client input.
+- Fail securely without exposing internal details.
+- Secrets must never be hardcoded.
+- HTTPS is mandatory for all APIs.
+- CORS must be explicitly configured with whitelisted origins and required HTTP methods only.
+- Sensitive operations require re-authentication.
+- Regular vulnerability scans are mandatory.
+- Token-based authentication (JWT) with expiration is mandatory.
+- Access Token (short-lived, memory or secure cookie) and Refresh Token (long-lived, secure HttpOnly cookie) must be used.
+- Role-Based Access Control (RBAC) is required.
+- No protected API without a valid access token.
+
+Backend Guidelines
+- MVC architecture is mandatory with strict separation of concerns.
+- Request flow: Request → Controller → Service → Model → Data Source → View → Response.
+- Models represent business logic and data. Responsibilities include domain rules, validation, and persistence.
+- Controllers handle requests, validation, service calls, and responses. They must be thin and must not contain business logic or direct data access.
+- All business logic must reside in Services, which manage rules, transactions, and multi-model workflows.
+- Views handle presentation only and must not contain business logic or data access.
+- Every API must use a DTO for validation before controller execution.
+- Centralized error handling is mandatory. Internal errors must never be exposed.
+- Log levels: Info, Warning, Error. Never log passwords, tokens, or sensitive data.
+
+Frontend Guidelines
+- Frontend: NextJS (TypeScript), Material UI, HTML, CSS.
+- Use semantic HTML and ensure accessibility.
+- All inputs must be controlled, and validation logic must be outside UI.
+- Use Material UI components first and avoid custom CSS when MUI props solve the problem.
+- Follow mobile-first responsive design principles.
+- Avoid unnecessary re-renders and lazy-load heavy assets.
+- Sanitize all inputs and prevent XSS.
+
+API Standards
+- RESTful, resource-oriented APIs with URL format: /api/v1/<resource>.
+- Use lowercase, kebab-case, plural nouns for URLs.
+- Standard Response Format:
+  {
+    "success": true,
+    "statusCode": 200,
+    "message": "Operation successful",
+    "data": {}
+  }
+- Error Format:
+  {
+    "success": false,
+    "statusCode": 400,
+    "message": "Validation failed",
+    "errors": []
+  }
+- Validate all request inputs (body, query, headers) and reject invalid or unknown fields.
+
+Code Quality & Reviews
+- Unit tests for business logic are mandatory. Edge cases and error paths must be tested.
+- Code must pass linting and formatting checks.
+- All database changes require code review and schema validation. Violations must be fixed before merge.
+
+Testing / Release
+- Every migration must be tested. Schema validation must run in CI.
+- Regular security training is mandatory.
+
+Compliance Checklist
+- All engineering and coding practices must align with the highest standards of security, maintainability, and compliance.
+- Code reviews must verify security rules, naming conventions, DTO usage, and response structure.
