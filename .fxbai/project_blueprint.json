@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "v1",
+  "project": {
+    "name": "API Project",
+    "description": "Project implementing mandatory technical, security, and architectural rules.",
+    "domain": "TBD",
+    "owner": "TBD"
+  },
+  "stack": {
+    "backend": {
+      "framework": "TBD",
+      "language": "TBD",
+      "runtime": "TBD",
+      "version": "TBD",
+      "not_used": false
+    },
+    "frontend": {
+      "framework": "NextJS",
+      "language": "TypeScript",
+      "stateManagement": "TBD",
+      "styling": "Material UI",
+      "not_used": false
+    },
+    "database": {
+      "type": "PostgreSQL",
+      "orm": "TypeORM",
+      "migrationStrategy": "TBD",
+      "not_used": false
+    }
+  },
+  "architecture": {
+    "style": "TBD",
+    "modulesPattern": "TBD",
+    "sharedPattern": "TBD",
+    "configPattern": "TBD",
+    "apiStyle": "RESTful"
+  },
+  "security": {
+    "authentication": "TBD",
+    "authorization": "TBD",
+    "secretsManagement": "TBD",
+    "rateLimit": false,
+    "refreshToken": false,
+    "auditing": false
+  },
+  "testing": {
+    "backend": {
+      "framework": "TBD",
+      "helpers": [],
+      "optional": [],
+      "coverageTarget": 0
+    },
+    "frontend": {
+      "unit": [
+        "TBD"
+      ],
+      "component": [
+        "TBD"
+      ],
+      "e2e": [
+        "TBD"
+      ]
+    }
+  },
+  "deployment": {
+    "containerized": false,
+    "ci": "TBD",
+    "cd": "TBD",
+    "hosting": "TBD",
+    "environments": [
+      "TBD"
+    ],
+    "rolloutStrategy": "TBD"
+  },
+  "nonFunctional": {
+    "expectedUsers": 0,
+    "scalability": "TBD",
+    "availability": "TBD",
+    "latency": "TBD",
+    "compliance": []
+  },
+  "requirements": {
+    "functional": [
+      "TBD"
+    ],
+    "constraints": [],
+    "outOfScope": []
+  },
+  "assumptions": [
+    "Unspecified: backend framework",
+    "Unspecified: backend language",
+    "Unspecified: backend runtime",
+    "Unspecified: backend version",
+    "Unspecified: state management",
+    "Unspecified: migration strategy",
+    "Unspecified: deployment strategy",
+    "Unspecified: modules pattern",
+    "Unspecified: shared pattern",
+    "Unspecified: config pattern"
+  ]
+}

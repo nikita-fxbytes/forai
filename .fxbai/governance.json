@@ -1,0 +1,91 @@
+{
+    "version": "1.0",
+    "commitHygiene": {
+        "enabled": true,
+        "noMixedChanges": true,
+        "conventionalCommits": true
+    },
+    "projectStructure": {
+        "enabled": true,
+        "framework": "auto-detect",
+        "rules": {
+            "nextjs": {
+                "pages": [
+                    "app/",
+                    "pages/"
+                ],
+                "api": [
+                    "app/api/",
+                    "pages/api/"
+                ],
+                "components": [
+                    "components/",
+                    "src/components/"
+                ],
+                "utils": [
+                    "utils/",
+                    "lib/",
+                    "src/utils/",
+                    "src/lib/"
+                ]
+            },
+            "nestjs": {
+                "modules": [
+                    "src/modules/",
+                    "src/"
+                ],
+                "controllers": [
+                    "src/controllers/",
+                    "src/**/controllers/"
+                ],
+                "services": [
+                    "src/services/",
+                    "src/**/services/"
+                ],
+                "entities": [
+                    "src/entities/",
+                    "src/**/entities/"
+                ]
+            },
+            "express": {
+                "routes": [
+                    "routes/",
+                    "src/routes/"
+                ],
+                "controllers": [
+                    "controllers/",
+                    "src/controllers/"
+                ],
+                "middleware": [
+                    "middleware/",
+                    "src/middleware/"
+                ],
+                "models": [
+                    "models/",
+                    "src/models/"
+                ]
+            }
+        }
+    },
+    "safety": {
+        "enabled": true,
+        "blockSecrets": true,
+        "blockEnvFiles": true,
+        "requireMigrationFlag": false,
+        "secretPatterns": [
+            "API_KEY",
+            "SECRET",
+            "PASSWORD",
+            "TOKEN",
+            "PRIVATE_KEY"
+        ]
+    },
+    "prRequirements": {
+        "enabled": true,
+        "requireDescription": true,
+        "requireLinkedIssue": false,
+        "requireLintPass": false,
+        "requireBuildPass": false,
+        "minDescriptionLength": 20
+    }
+}

@@ -1,0 +1,298 @@
+{
+  "schemaVersion": "v1",
+  "projectId": "first_project_using_ai_new",
+  "modules": [
+    {
+      "id": "0be2cd32-9d00-479b-8f0b-3a22430a148d",
+      "name": "auth",
+      "type": "service",
+      "status": "pending",
+      "path": "server/src/modules/auth",
+      "files": [],
+      "dependencies": [],
+      "dependents": [],
+      "metadata": {
+        "description": "Handles authentication logic including JWT token generation and validation.",
+        "version": "1.0.0",
+        "tags": [
+          "token-based authentication",
+          "JWT expiration"
+        ]
+      },
+      "packages": {
+        "dependencies": [
+          "jsonwebtoken",
+          "bcrypt"
+        ],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [
+          "JWT_SECRET=your_secret_key"
+        ],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: high)"
+        }
+      ]
+    },
+    {
+      "id": "12aadc31-99ac-49c0-8433-6a2bfeddac46",
+      "name": "user",
+      "type": "entity",
+      "status": "pending",
+      "path": "server/src/modules/user",
+      "files": [],
+      "dependencies": [],
+      "dependents": [
+        "user-controller",
+        "user-repository"
+      ],
+      "metadata": {
+        "description": "Defines the user entity and its properties in the database.",
+        "version": "1.0.0",
+        "tags": [
+          "user management",
+          "user roles"
+        ]
+      },
+      "packages": {
+        "dependencies": [
+          "typeorm"
+        ],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: high)"
+        }
+      ]
+    },
+    {
+      "id": "11aa3353-06e3-4690-9b28-663f6f417361",
+      "name": "user-controller",
+      "type": "controller",
+      "status": "pending",
+      "path": "server/src/modules/user/controllers",
+      "files": [],
+      "dependencies": [
+        "user"
+      ],
+      "dependents": [],
+      "metadata": {
+        "description": "Handles incoming requests related to user operations.",
+        "version": "1.0.0",
+        "tags": [
+          "create user",
+          "get user",
+          "update user"
+        ]
+      },
+      "packages": {
+        "dependencies": [],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: high)"
+        }
+      ]
+    },
+    {
+      "id": "2447b506-e983-434a-9946-15663f791157",
+      "name": "user-repository",
+      "type": "repository",
+      "status": "pending",
+      "path": "server/src/modules/user/repositories",
+      "files": [],
+      "dependencies": [
+        "user"
+      ],
+      "dependents": [],
+      "metadata": {
+        "description": "Handles database operations for user entity.",
+        "version": "1.0.0",
+        "tags": [
+          "CRUD operations"
+        ]
+      },
+      "packages": {
+        "dependencies": [
+          "typeorm"
+        ],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: medium)"
+        }
+      ]
+    },
+    {
+      "id": "8cbda9f1-ab8a-421d-98f1-c3e29e1aa85b",
+      "name": "common",
+      "type": "util",
+      "status": "pending",
+      "path": "server/src/modules/common",
+      "files": [],
+      "dependencies": [],
+      "dependents": [],
+      "metadata": {
+        "description": "Contains common utility functions used across the application.",
+        "version": "1.0.0",
+        "tags": [
+          "input validation",
+          "error handling"
+        ]
+      },
+      "packages": {
+        "dependencies": [],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: medium)"
+        }
+      ]
+    },
+    {
+      "id": "ea5d3c61-4f6b-4de2-afa2-8adfb4d4289b",
+      "name": "api-docs",
+      "type": "config",
+      "status": "pending",
+      "path": "server/src/modules/api-docs",
+      "files": [],
+      "dependencies": [],
+      "dependents": [],
+      "metadata": {
+        "description": "Configuration for API documentation generation.",
+        "version": "1.0.0",
+        "tags": [
+          "API documentation"
+        ]
+      },
+      "packages": {
+        "dependencies": [
+          "swagger-ui-express",
+          "swagger-jsdoc"
+        ],
+        "devDependencies": []
+      },
+      "config": {
+        "env": [],
+        "scripts": {}
+      },
+      "createdAt": "2026-02-05T07:20:03.302Z",
+      "updatedAt": "2026-02-05T07:20:03.302Z",
+      "generationLog": [
+        {
+          "timestamp": "2026-02-05T07:20:03.302Z",
+          "action": "created",
+          "message": "Auto-detected from blueprint (priority: low)"
+        }
+      ]
+    }
+  ],
+  "generatedAt": "2026-02-05T07:19:55.521Z",
+  "lastModifiedAt": "2026-02-05T07:19:55.522Z",
+  "dependencyGraph": {
+    "0be2cd32-9d00-479b-8f0b-3a22430a148d": [],
+    "12aadc31-99ac-49c0-8433-6a2bfeddac46": [],
+    "11aa3353-06e3-4690-9b28-663f6f417361": [
+      "user"
+    ],
+    "2447b506-e983-434a-9946-15663f791157": [
+      "user"
+    ],
+    "8cbda9f1-ab8a-421d-98f1-c3e29e1aa85b": [],
+    "ea5d3c61-4f6b-4de2-afa2-8adfb4d4289b": []
+  },
+  "codeStyle": {
+    "naming": {
+      "files": "kebab-case",
+      "classes": "PascalCase",
+      "functions": "camelCase",
+      "constants": "UPPER_SNAKE_CASE"
+    },
+    "imports": {
+      "order": [
+        "builtin",
+        "external",
+        "internal",
+        "parent",
+        "sibling",
+        "index"
+      ],
+      "pathAliases": {
+        "@app/*": "src/*",
+        "@shared/*": "src/shared/*",
+        "@modules/*": "src/modules/*"
+      }
+    },
+    "formatting": {
+      "indentSize": 2,
+      "useTabs": false,
+      "singleQuote": true,
+      "trailingComma": "all",
+      "semicolons": true
+    }
+  },
+  "hooks": {
+    "preGenerate": [],
+    "postGenerate": [],
+    "onError": []
+  },
+  "statistics": {
+    "totalModules": 6,
+    "totalFiles": 0,
+    "modulesByType": {
+      "service": 1,
+      "entity": 1,
+      "controller": 1,
+      "repository": 1,
+      "util": 1,
+      "config": 1
+    },
+    "modulesByStatus": {
+      "pending": 6
+    }
+  }
+}
