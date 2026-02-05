@@ -1,29 +1,30 @@
 name: AI PR Validation
+
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ main, master, development ]
+    types: [ opened, synchronize, reopened ]
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Install fxbai-dev
-        run: npm install -g fxbai-dev
+      - name: Install AgenticAi CLI
+        run: npm install -g https://github.com/fxbytesin/AgenticAi.git
 
-      - name: Run AI PR Governance
-        run: fxbai-dev validate-pr --pr-number ${{ github.event.pull_request.number }}
+      - name: Run AI Governance Validation
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AI_PROVIDER: ${{ secrets.AI_PROVIDER || 'openai' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: fxbai-dev validate-pr --pr-number ${{ github.event.pull_request.number }}
