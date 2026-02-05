@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Demo = () => {
-    const API_KEY = "sk-12345abcde"
+    const API_KEY = "sk-12345abcde";
   return (
-    <div>demo holdcb
+    <div>demo holdcb{API_KEY}
     </div>
   )
 }
