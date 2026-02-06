@@ -3,7 +3,7 @@ import React from 'react'
 const New = () => {
   return (
     <div> New
-      nye ddddddgggsd
+      nye ddddddgggsdsfsfsf
     </div>
   )
 }
