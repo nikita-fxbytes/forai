@@ -1,11 +1,11 @@
 import React from 'react'
 
-const page = () => {
+const New = () => {
   return (
-    <div> fhfhdfhdhdfhdf
+    <div> New
       nye ddddddgggsd
     </div>
   )
 }
 
-export default page
+export default New
