@@ -1,91 +1,57 @@
 {
-    "version": "1.0",
-    "commitHygiene": {
-        "enabled": true,
-        "noMixedChanges": true,
-        "conventionalCommits": true
-    },
-    "projectStructure": {
-        "enabled": true,
-        "framework": "auto-detect",
-        "rules": {
-            "nextjs": {
-                "pages": [
-                    "app/",
-                    "pages/"
-                ],
-                "api": [
-                    "app/api/",
-                    "pages/api/"
-                ],
-                "components": [
-                    "components/",
-                    "src/components/"
-                ],
-                "utils": [
-                    "utils/",
-                    "lib/",
-                    "src/utils/",
-                    "src/lib/"
-                ]
-            },
-            "nestjs": {
-                "modules": [
-                    "src/modules/",
-                    "src/"
-                ],
-                "controllers": [
-                    "src/controllers/",
-                    "src/**/controllers/"
-                ],
-                "services": [
-                    "src/services/",
-                    "src/**/services/"
-                ],
-                "entities": [
-                    "src/entities/",
-                    "src/**/entities/"
-                ]
-            },
-            "express": {
-                "routes": [
-                    "routes/",
-                    "src/routes/"
-                ],
-                "controllers": [
-                    "controllers/",
-                    "src/controllers/"
-                ],
-                "middleware": [
-                    "middleware/",
-                    "src/middleware/"
-                ],
-                "models": [
-                    "models/",
-                    "src/models/"
-                ]
-            }
+    "policies": {
+        "commitHygiene": {
+            "enabled": true,
+            "rules": [
+                "Use conventional commits (feat, fix, refactor, etc.)",
+                "No mixed changes (e.g., mixing logic with styling)",
+                "Meaningful commit messages"
+            ]
+        },
+        "structure": {
+            "enabled": true,
+            "frameworks": [
+                "nextjs",
+                "nestjs",
+                "express"
+            ],
+            "rules": [
+                "Controllers must be in /controllers or /api",
+                "Components must be in /components",
+                "Services must be in /services"
+            ]
+        },
+        "safety": {
+            "enabled": true,
+            "checkSecrets": true,
+            "checkDangerousOps": true,
+            "blacklist": [
+                ".env",
+                "config/private.json",
+                "id_rsa"
+            ]
+        },
+        "prRequirements": {
+            "enabled": true,
+            "checkDescription": true,
+            "checkTickets": true,
+            "minDescriptionLength": 20
+        },
+        "validation": {
+            "commands": [
+                {
+                    "name": "Lint",
+                    "cmd": "npm run lint"
+                },
+                {
+                    "name": "Build",
+                    "cmd": "npm run build"
+                },
+                {
+                    "name": "Type Check",
+                    "cmd": "npx tsc --noEmit"
+                }
+            ]
         }
-    },
-    "safety": {
-        "enabled": true,
-        "blockSecrets": true,
-        "blockEnvFiles": true,
-        "requireMigrationFlag": false,
-        "secretPatterns": [
-            "API_KEY",
-            "SECRET",
-            "PASSWORD",
-            "TOKEN",
-            "PRIVATE_KEY"
-        ]
-    },
-    "prRequirements": {
-        "enabled": true,
-        "requireDescription": true,
-        "requireLinkedIssue": false,
-        "requireLintPass": false,
-        "requireBuildPass": false,
-        "minDescriptionLength": 20
     }
 }
