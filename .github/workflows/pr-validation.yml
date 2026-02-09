@@ -33,7 +33,6 @@ jobs:
         run: |
           cd .agentic-ai-cli
           npm install
-          npm run build
 
       - name: Run AI Governance Validation
         env:
@@ -41,4 +40,6 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .agentic-ai-cli/dist/cli.js validate-pr --pr-number ${{ github.event.pull_request.number }}
+        run: |
+          cd .agentic-ai-cli
+          npx ts-node src/cli.ts validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ..
