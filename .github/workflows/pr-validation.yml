@@ -22,43 +22,24 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Checkout AgenticAi CLI
-        uses: actions/checkout@v4
-        with:
-          repository: fxbytesin/AgenticAi
-          path: agentic-ai-repo
-          token: ${{ secrets.AGENTIC_AI_TOKEN }}
-
-      - name: Verify CLI Checkout
+      - name: Download AgenticAi CLI
         env:
           MY_TOKEN: ${{ secrets.AGENTIC_AI_TOKEN }}
         run: |
-          echo "Current Workspace: ${{ github.workspace }}"
-          if [ -z "$MY_TOKEN" ]; then
-            echo "❌ AGENTIC_AI_TOKEN is EMPTY. Please check your GitHub Secrets."
-          else
-            echo "✅ AGENTIC_AI_TOKEN is set."
-          fi
+          echo "Cloning AgenticAi repository..."
+          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git agentic-ai-repo
           
-          echo "--- Root Directory Contents ---"
-          ls -F ${{ github.workspace }}
-          echo "-------------------------------"
-          
-          if [ -d "${{ github.workspace }}/agentic-ai-repo" ]; then
-            echo "✅ agentic-ai-repo folder exists."
-            if [ -f "${{ github.workspace }}/agentic-ai-repo/package.json" ]; then
-              echo "✅ CLI package.json found."
-            else
-              echo "❌ CLI package.json NOT found inside agentic-ai-repo."
-            fi
+          if [ -d "agentic-ai-repo" ]; then
+            echo "✅ Repository cloned successfully."
+            ls -la agentic-ai-repo
           else
-            echo "❌ agentic-ai-repo folder NOT found at ${{ github.workspace }}."
+            echo "❌ Failed to clone repository."
             exit 1
           fi
 
       - name: Setup AgenticAi CLI
         run: |
-          cd ${{ github.workspace }}/agentic-ai-repo
+          cd agentic-ai-repo
           npm install
 
       - name: Run AI Governance Validation
@@ -68,4 +49,6 @@ jobs:
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm run dev --prefix ${{ github.workspace }}/agentic-ai-repo -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
+          # Use absolute path to ensure npm find the package.json correctly
+          CLI_DIR="${{ github.workspace }}/agentic-ai-repo"
+          npm run dev --prefix "$CLI_DIR" -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
