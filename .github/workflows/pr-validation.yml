@@ -34,6 +34,12 @@ jobs:
           cd .agentic-ai-cli
           npm install
 
+      - name: Debug CLI Structure (on failure)
+        if: failure()
+        run: |
+          echo "Listing CLI directory structure..."
+          ls -R .agentic-ai-cli
+
       - name: Run AI Governance Validation
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -41,5 +47,5 @@ jobs:
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd .agentic-ai-cli
-          npx ts-node src/cli.ts validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ..
+          # Run using npm run dev from the CLI's directory, targeting the parent project
+          npm run dev --prefix .agentic-ai-cli -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd $GITHUB_WORKSPACE
