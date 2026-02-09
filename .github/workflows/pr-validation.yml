@@ -22,33 +22,24 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Download AgenticAi CLI
+      - name: Download, Setup and Run AI Governance
         env:
           MY_TOKEN: ${{ secrets.AGENTIC_AI_TOKEN }}
-        run: |
-          echo "Cloning AgenticAi repository..."
-          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git agentic-ai-repo
-          
-          if [ -d "agentic-ai-repo" ]; then
-            echo "✅ Repository cloned successfully."
-            ls -la agentic-ai-repo
-          else
-            echo "❌ Failed to clone repository."
-            exit 1
-          fi
-
-      - name: Setup AgenticAi CLI
-        run: |
-          cd agentic-ai-repo
-          npm install
-
-      - name: Run AI Governance Validation
-        env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Use absolute path to ensure npm find the package.json correctly
-          CLI_DIR="${{ github.workspace }}/agentic-ai-repo"
-          npm run dev --prefix "$CLI_DIR" -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
+          echo "🚀 Starting AI Governance Flow..."
+          
+          # 1. Clone CLI
+          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git ./cli-tool
+          
+          # 2. Setup CLI
+          cd ./cli-tool
+          npm install
+          npm run build
+          
+          # 3. Run Validation on the parent project (the one being tested)
+          echo "🔍 Running validation on project root: ${{ github.workspace }}"
+          node dist/cli.js validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
