@@ -36,8 +36,8 @@ jobs:
           # 1. Clone CLI to a safe place outside the project workspace
           CLI_PATH="$HOME/agentic-ai-cli-tool"
           rm -rf $CLI_PATH
-          # Cloning the default branch of the tool
-          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git $CLI_PATH
+          # Cloning the development branch of the tool
+          git clone -b development https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git $CLI_PATH
           
           echo "--- CLI Directory Contents (Recursive) ---"
           ls -R $CLI_PATH
