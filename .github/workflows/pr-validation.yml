@@ -23,7 +23,9 @@ jobs:
         run: npm install
 
       - name: Install AgenticAi CLI
-        run: npm install -g https://github.com/fxbytesin/AgenticAi.git
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm install -g https://x-access-token:${GH_TOKEN}@github.com/fxbytesin/AgenticAi.git
 
       - name: Run AI Governance Validation
         env:
