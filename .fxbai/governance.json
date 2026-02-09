@@ -36,6 +36,22 @@
             "checkDescription": true,
             "checkTickets": true,
             "minDescriptionLength": 20
+        },
+        "validation": {
+            "commands": [
+                {
+                    "name": "Lint",
+                    "cmd": "npm run lint"
+                },
+                {
+                    "name": "Build",
+                    "cmd": "npm run build"
+                },
+                {
+                    "name": "Type Check",
+                    "cmd": "npx tsc --noEmit"
+                }
+            ]
         }
     }
 }
