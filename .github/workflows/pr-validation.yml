@@ -30,18 +30,20 @@ jobs:
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -x
           echo "🚀 Initializing AI Governance Agent..."
           
-          # 1. Clone the CLI tool into a temporary folder
-          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git ./agentic-ai-helper
+          # 1. Clone CLI to a safe place outside the project workspace
+          CLI_PATH="$HOME/agentic-ai-cli-tool"
+          rm -rf $CLI_PATH
+          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git $CLI_PATH
           
-          # 2. Build and Install it globally in the runner environment
-          cd ./agentic-ai-helper
+          # 2. Setup and Build CLI in its own directory
+          cd $CLI_PATH
           npm install
           npm run build
-          npm install -g .
           
-          # 3. Go back to project root and run the validation
+          # 3. Go back to project workspace and run the tool
           cd ${{ github.workspace }}
           echo "🔍 Running validation on: $(pwd)"
-          fxbai-dev validate-pr --pr-number ${{ github.event.pull_request.number }}
+          node $CLI_PATH/dist/cli.js validate-pr --pr-number ${{ github.event.pull_request.number }}
