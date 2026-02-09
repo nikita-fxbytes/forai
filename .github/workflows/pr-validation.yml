@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Download, Setup and Run AI Governance
+      - name: Setup and Run AI Governance
         env:
           MY_TOKEN: ${{ secrets.AGENTIC_AI_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -30,16 +30,18 @@ jobs:
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "🚀 Starting AI Governance Flow..."
+          echo "🚀 Initializing AI Governance Agent..."
           
-          # 1. Clone CLI
-          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git ./cli-tool
+          # 1. Clone the CLI tool into a temporary folder
+          git clone https://x-access-token:${MY_TOKEN}@github.com/fxbytesin/AgenticAi.git ./agentic-ai-helper
           
-          # 2. Setup CLI
-          cd ./cli-tool
+          # 2. Build and Install it globally in the runner environment
+          cd ./agentic-ai-helper
           npm install
           npm run build
+          npm install -g .
           
-          # 3. Run Validation on the parent project (the one being tested)
-          echo "🔍 Running validation on project root: ${{ github.workspace }}"
-          node dist/cli.js validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
+          # 3. Go back to project root and run the validation
+          cd ${{ github.workspace }}
+          echo "🔍 Running validation on: $(pwd)"
+          fxbai-dev validate-pr --pr-number ${{ github.event.pull_request.number }}
