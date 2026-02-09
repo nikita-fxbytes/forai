@@ -22,10 +22,18 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install AgenticAi CLI
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm install -g https://x-access-token:${GH_TOKEN}@github.com/fxbytesin/AgenticAi.git
+      - name: Checkout AgenticAi CLI
+        uses: actions/checkout@v4
+        with:
+          repository: fxbytesin/AgenticAi
+          path: .agentic-ai-cli
+          token: ${{ secrets.AGENTIC_AI_TOKEN }}
+
+      - name: Setup AgenticAi CLI
+        run: |
+          cd .agentic-ai-cli
+          npm install
+          npm run build
 
       - name: Run AI Governance Validation
         env:
@@ -33,4 +41,4 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: fxbai-dev validate-pr --pr-number ${{ github.event.pull_request.number }}
+        run: node .agentic-ai-cli/dist/cli.js validate-pr --pr-number ${{ github.event.pull_request.number }}
