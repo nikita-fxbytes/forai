@@ -29,16 +29,22 @@ jobs:
           path: .agentic-ai-cli
           token: ${{ secrets.AGENTIC_AI_TOKEN }}
 
+      - name: Verify CLI Checkout
+        run: |
+          echo "Current Workspace: ${{ github.workspace }}"
+          if [ -f "${{ github.workspace }}/.agentic-ai-cli/package.json" ]; then
+            echo "✅ CLI checked out successfully."
+            ls -la ${{ github.workspace }}/.agentic-ai-cli
+          else
+            echo "❌ CLI package.json NOT found at ${{ github.workspace }}/.agentic-ai-cli"
+            ls -R ${{ github.workspace }}
+            exit 1
+          fi
+
       - name: Setup AgenticAi CLI
         run: |
-          cd .agentic-ai-cli
+          cd ${{ github.workspace }}/.agentic-ai-cli
           npm install
-
-      - name: Debug CLI Structure (on failure)
-        if: failure()
-        run: |
-          echo "Listing CLI directory structure..."
-          ls -R .agentic-ai-cli
 
       - name: Run AI Governance Validation
         env:
@@ -47,5 +53,4 @@ jobs:
           AI_PROVIDER: ${{ secrets.AI_PROVIDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Run using npm run dev from the CLI's directory, targeting the parent project
-          npm run dev --prefix .agentic-ai-cli -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd $GITHUB_WORKSPACE
+          npm run dev --prefix ${{ github.workspace }}/.agentic-ai-cli -- validate-pr --pr-number ${{ github.event.pull_request.number }} --cwd ${{ github.workspace }}
