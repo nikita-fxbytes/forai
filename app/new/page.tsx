@@ -2,7 +2,7 @@ import React from 'react'
 
 const New = () => {
   return (
-    <div> NewdfhfFSVCNVNFGGGDA
+    <div> NewdfhfFSVCNVNXXFGGGDA
     </div>
   )
 }
